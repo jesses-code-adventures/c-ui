@@ -68,6 +68,7 @@ int main(int argc, char *argv[]) {
   Line lines[10];
   Point currentStart;
   Point currentEnd;
+  int pressed = 0;
 
   // Event loop
   SDL_Event e;
@@ -80,6 +81,7 @@ int main(int argc, char *argv[]) {
       case SDL_MOUSEBUTTONDOWN:
         currentStart.x = e.button.x;
         currentStart.y = e.button.y;
+        pressed = 1;
         break;
       case SDL_MOUSEBUTTONUP:
         currentEnd.x = e.button.x;
@@ -93,15 +95,28 @@ int main(int argc, char *argv[]) {
         newLine.end = currentEnd;
         lines[indexToInsert] = newLine;
         linesAdded++;
+        pressed = 0;
         break;
       default: {
+        if (pressed > 0) {
+          currentEnd.x = e.button.x;
+          currentEnd.y = e.button.y;
+          int indexToInsert = linesAdded;
+          while (indexToInsert > 9) {
+            indexToInsert -= 10;
+          }
+          Line newLine;
+          newLine.start = currentStart;
+          newLine.end = currentEnd;
+          lines[indexToInsert] = newLine;
+        }
       }
       }
     }
     SDL_SetRenderDrawColor(renderer, BLACK.r, BLACK.g, BLACK.b, BLACK.a);
     SDL_RenderClear(renderer);
     SDL_SetRenderDrawColor(renderer, WHITE.r, WHITE.g, WHITE.b, WHITE.a);
-    for (int i = 0; i < linesAdded && i < 10; ++i) {
+    for (int i = 0; i < (linesAdded + pressed) && i < 10; ++i) {
       SDL_RenderDrawLine(renderer, lines[i].start.x, lines[i].start.y,
                          lines[i].end.x, lines[i].end.y);
     }
