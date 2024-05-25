@@ -1,3 +1,4 @@
 export DYLD_FRAMEWORK_PATH=/Library/Frameworks
-gcc -o output/out main.c -framework SDL2 -F /Library/Frameworks -I /Library/Frameworks/SDL2.framework/Headers
+set -xe
+gcc -g -o output/out main.c -framework SDL2 -F /Library/Frameworks -I /Library/Frameworks/SDL2.framework/Headers
 ./output/out
