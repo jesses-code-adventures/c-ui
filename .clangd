@@ -1,0 +1,4 @@
+CompileFlags:
+  Add:
+    - -F/Library/Frameworks
+    - -I/Library/Frameworks/SDL2.framework/Headers
