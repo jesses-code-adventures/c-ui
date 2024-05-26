@@ -1,9 +1,9 @@
 #ifndef COLOR_SELECTOR_H
 #define COLOR_SELECTOR_H
 
-#include <SDL2/SDL.h>
 #include "./color_selector.h"
 #include "../types/colors.h"
+#include <SDL2/SDL.h>
 
 void renderColorSelectorGrid(SDL_Renderer *renderer) {
   SDL_Rect rect;
@@ -14,7 +14,7 @@ void renderColorSelectorGrid(SDL_Renderer *renderer) {
       rect.x = i * BOX_SIZE;
       rect.y = j * BOX_SIZE;
       SDL_SetRenderDrawColor(renderer, COLORS[i * 4 + j].r, COLORS[i * 4 + j].g,
-                              COLORS[i * 4 + j].b, COLORS[i * 4 + j].a);
+                             COLORS[i * 4 + j].b, COLORS[i * 4 + j].a);
       SDL_RenderFillRect(renderer, &rect);
     }
   }

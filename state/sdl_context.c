@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-SDLContext* initializeApp() {
+SDLContext *initializeApp() {
   if (SDL_Init(SDL_INIT_VIDEO) != 0) {
     printf("SDL_Init Error: %s\n", SDL_GetError());
     return NULL;
@@ -24,8 +24,8 @@ SDLContext* initializeApp() {
     SDL_Quit();
     return NULL;
   }
-  SDL_SetRenderDrawColor(renderer, COLORS[BLACK].r, COLORS[BLACK].g, COLORS[BLACK].b,
-                         COLORS[BLACK].a);
+  SDL_SetRenderDrawColor(renderer, COLORS[BLACK].r, COLORS[BLACK].g,
+                         COLORS[BLACK].b, COLORS[BLACK].a);
   SDL_RenderClear(renderer);
   SDL_RenderPresent(renderer);
 

@@ -10,6 +10,4 @@ DrawingState *initializeDrawingState() {
   return state;
 }
 
-void freeDrawingState(DrawingState *state) {
-  free(state);
-}
+void freeDrawingState(DrawingState *state) { free(state); }

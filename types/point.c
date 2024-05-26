@@ -6,4 +6,3 @@ Point fromSDLMouseButtonEvent(SDL_MouseButtonEvent e) {
   p.y = e.y;
   return p;
 }
-
