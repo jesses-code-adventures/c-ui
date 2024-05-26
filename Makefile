@@ -4,7 +4,7 @@ CFLAGS = -g
 LDFLAGS = -framework SDL2 -F /Library/Frameworks -I /Library/Frameworks/SDL2.framework/Headers -Wl,-rpath,/Library/Frameworks
 
 # Source files
-SRC = $(wildcard main.c state/*.c types/*.c)
+SRC = $(wildcard main.c state/*.c types/*.c rendering/*.c events/*.c)
 
 # Output binary
 OUTPUT = output/out

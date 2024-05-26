@@ -3,6 +3,7 @@
 
 #include "../types/line.h"
 #include "../types/point.h"
+#include <SDL2/SDL.h>
 
 typedef struct {
   int running;
@@ -11,6 +12,7 @@ typedef struct {
   int linesAdded;
   Point currentStart;
   Point currentEnd;
+  SDL_Color *currentColor;
 } DrawingState;
 
 DrawingState *initializeDrawingState();
