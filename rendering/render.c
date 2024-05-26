@@ -1,6 +1,6 @@
 #include "render.h"
 #include "../types/colors.h"
-#include "./color_selector.h"
+#include "./palette.h"
 
 void renderRefresh(SDLContext *context, DrawingState *state) {
   SDL_SetRenderDrawColor(context->renderer, COLORS[BLACK].r, COLORS[BLACK].g,
@@ -14,7 +14,7 @@ void renderRefresh(SDLContext *context, DrawingState *state) {
                        state->lines[i].start.y, state->lines[i].end.x,
                        state->lines[i].end.y);
   }
-  renderColorSelectorGrid(context->renderer);
+  renderPalette(context->renderer);
   SDL_RenderPresent(context->renderer);
   SDL_Delay(16); // match roughly 60fps
 }

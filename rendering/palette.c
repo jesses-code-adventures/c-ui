@@ -1,8 +1,8 @@
-#include "./color_selector.h"
+#include "./palette.h"
 #include "../types/colors.h"
 #include <SDL2/SDL.h>
 
-void renderColorSelectorGrid(SDL_Renderer *renderer) {
+void renderPalette(SDL_Renderer *renderer) {
   SDL_Rect rect;
   rect.w = BOX_SIZE;
   rect.h = BOX_SIZE;

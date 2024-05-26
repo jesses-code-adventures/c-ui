@@ -1,5 +1,5 @@
 #include "./events/handler.h"
-#include "./rendering/color_selector.h"
+#include "./rendering/palette.h"
 #include "./rendering/render.h"
 #include "./state/drawing_state.h"
 #include "./state/sdl_context.h"
