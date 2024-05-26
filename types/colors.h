@@ -3,20 +3,15 @@
 
 #include "SDL2/SDL_pixels.h"
 
-extern const SDL_Color RED_COLOR;
-extern const SDL_Color YELLOW_COLOR;
-extern const SDL_Color GREEN_COLOR;
-extern const SDL_Color BLUE_COLOR;
-extern const SDL_Color BLACK_COLOR;
-extern const SDL_Color WHITE_COLOR;
-
 enum Color {
+    BLACK,
+    WHITE,
     RED,
     YELLOW,
     GREEN,
     BLUE,
-    BLACK,
-    WHITE,
+    MAGENTA,
+    CYAN,
     COLOR_COUNT
 };
 

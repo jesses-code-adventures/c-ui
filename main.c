@@ -1,4 +1,5 @@
 #include "./types/colors.h"
+#include "./state/drawing_state.h"
 #include "./types/line.h"
 #include "./types/point.h"
 #include "./state/sdl_context.h"
@@ -12,48 +13,42 @@ int main(int argc, char *argv[]) {
   if (context == NULL) {
     return 1;
   }
-  // should be contained in a state struct
-  int running = 1;
-  int linesAdded = 0;
-  Line lines[10];
-  Point currentStart;
-  Point currentEnd;
-  int pressed = 0;
+  DrawingState *state = initializeDrawingState();
   SDL_Event e;
-  while (running) {
+  while (context->running) {
     while (SDL_PollEvent(&e)) {
       switch (e.type) {
       case SDL_QUIT:
-        running = 0;
+        context->running = 0;
         break;
       case SDL_MOUSEBUTTONDOWN:
-        currentStart = fromSDLMouseButtonEvent(e.button);
-        pressed = 1;
+        state->currentStart = fromSDLMouseButtonEvent(e.button);
+        state->mousePressed = 1;
         break;
       case SDL_MOUSEBUTTONUP:
-        currentEnd = fromSDLMouseButtonEvent(e.button);
-        int indexToInsert = linesAdded;
+        state->currentEnd = fromSDLMouseButtonEvent(e.button);
+        int indexToInsert = state->linesAdded;
         while (indexToInsert > 9) {
           indexToInsert -= 10;
         }
         Line newLine;
-        newLine.start = currentStart;
-        newLine.end = currentEnd;
-        lines[indexToInsert] = newLine;
-        linesAdded++;
-        pressed = 0;
+        newLine.start = state->currentStart;
+        newLine.end = state->currentEnd;
+        state->lines[indexToInsert] = newLine;
+        state->linesAdded++;
+        state->mousePressed = 0;
         break;
       default: {
-        if (pressed > 0) {
-          currentEnd = fromSDLMouseButtonEvent(e.button);
-          int indexToInsert = linesAdded;
+        if (state->mousePressed > 0) {
+          state->currentEnd = fromSDLMouseButtonEvent(e.button);
+          int indexToInsert = state->linesAdded;
           while (indexToInsert > 9) {
             indexToInsert -= 10;
           }
           Line newLine;
-          newLine.start = currentStart;
-          newLine.end = currentEnd;
-          lines[indexToInsert] = newLine;
+          newLine.start = state->currentStart;
+          newLine.end = state->currentEnd;
+          state->lines[indexToInsert] = newLine;
         }
       }
       }
@@ -61,11 +56,11 @@ int main(int argc, char *argv[]) {
     SDL_SetRenderDrawColor(context->renderer, COLORS[BLACK].r, COLORS[BLACK].g,
                            COLORS[BLACK].b, COLORS[BLACK].a);
     SDL_RenderClear(context->renderer);
-    SDL_SetRenderDrawColor(context->renderer, COLORS[WHITE].r, COLORS[WHITE].g,
-                           COLORS[WHITE].b, COLORS[WHITE].a);
-    for (int i = 0; i < (linesAdded + pressed) && i < 10; ++i) {
-      SDL_RenderDrawLine(context->renderer, lines[i].start.x, lines[i].start.y,
-                         lines[i].end.x, lines[i].end.y);
+    SDL_SetRenderDrawColor(context->renderer, COLORS[CYAN].r, COLORS[CYAN].g,
+                           COLORS[CYAN].b, COLORS[CYAN].a);
+    for (int i = 0; i < (state->linesAdded + state->mousePressed) && i < 10; ++i) {
+      SDL_RenderDrawLine(context->renderer, state->lines[i].start.x, state->lines[i].start.y,
+                         state->lines[i].end.x, state->lines[i].end.y);
     }
     SDL_RenderPresent(context->renderer);
     SDL_Delay(8);

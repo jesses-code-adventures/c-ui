@@ -9,11 +9,6 @@ typedef struct {
   SDL_Color *color;
 } Point;
 
-Point fromSDLMouseButtonEvent(SDL_MouseButtonEvent e) {
-  Point p;
-  p.x = e.x;
-  p.y = e.y;
-  return p;
-}
+Point fromSDLMouseButtonEvent(SDL_MouseButtonEvent e);
 
 #endif

@@ -6,9 +6,10 @@
 typedef struct {
   SDL_Window *window;
   SDL_Renderer *renderer;
+  int running;
 } SDLContext;
 
-SDLContext* initializeApp();
+SDLContext *initializeApp();
 void destroyContext(SDLContext *context);
 
 #endif

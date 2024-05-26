@@ -32,6 +32,7 @@ SDLContext* initializeApp() {
   SDLContext *context = (SDLContext *)malloc(sizeof(SDLContext));
   context->window = window;
   context->renderer = renderer;
+  context->running = 1;
   return context;
 }
 
@@ -45,6 +46,7 @@ void destroyContext(SDLContext *context) {
   if (context->window) {
     SDL_DestroyWindow(context->window);
   }
+  context->running = 0;
   free(context);
   SDL_Quit();
 }
